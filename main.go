@@ -1,5 +1,6 @@
 package main
 
+<<<<<<< HEAD
 import (
 	"encoding/json"
 	"fmt"
@@ -48,4 +49,10 @@ func TradeAPI()  {
 	for _, v := range trades {
 		fmt.Printf("|%20s|%20s|%20s|\n", v.Price, v.Qty, v.QuoteQty)
 	}
+=======
+import "fmt"
+
+func main() {
+	fmt.Println("Hello World")
+>>>>>>> 0c9fdd9089bc5d486f9d6ff9919062e246a0f0c4
 }
