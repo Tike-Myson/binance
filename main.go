@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-type Trade []struct {
+type Trade struct {
 	ID           int    `json:"id"`
 	Price        string `json:"price"`
 	Qty          string `json:"qty"`
@@ -20,15 +20,16 @@ type Trade []struct {
 }
 
 func main() {
+	fmt.Printf("|%20s|%20s|%20s|\n", "Price", "Qty", "QuoteQty")
 	for {
-		time.Sleep(5 * time.Second)
+		time.Sleep(1 * time.Second)
 		TradeAPI()
 	}
 }
 
 func TradeAPI()  {
 	url := "https://api1.binance.com/api/v3/trades?symbol=BTCUSDT&limit=2"
-	trade := new(Trade)
+	var trades []Trade
 	resp, err :=  http.Get(url)
 	if err != nil {
 		log.Fatal(err.Error())
@@ -42,8 +43,9 @@ func TradeAPI()  {
 		return
 	}
 
-	json.Unmarshal(body, &trade)
+	json.Unmarshal(body, &trades)
 
-	fmt.Println(trade)
-
+	for _, v := range trades {
+		fmt.Printf("|%20s|%20s|%20s|\n", v.Price, v.Qty, v.QuoteQty)
+	}
 }
